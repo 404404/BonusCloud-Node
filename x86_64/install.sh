@@ -157,20 +157,7 @@ run_as_root(){
     fi
 }
 _check_pg(){
-    # Detection package manager
-    if which apt >/dev/null 2>&1 ; then
-        # echoinfo "Find apt\n"
-        PG="apt"
-    elif which yum >/dev/null 2>&1 ; then
-        # echoinfo "Find yum\n"
-        PG="yum"
-    elif which pacman>/dev/null 2>&1 ; then
-        # log "[info]" "Find pacman"
-        PG="pacman"
-    else
-        log "[error]" "\"apt\" or \"yum\" or \"pacman\" ,not found ,exit "
-        exit 1
-    fi
+    PG="yum"
 }
 _check_exec(){
     which "$1" >/dev/null 2>&1
