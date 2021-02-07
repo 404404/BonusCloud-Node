@@ -5,7 +5,7 @@
 
 OS=""
 OS_CODENAME=""
-PG=""
+PG="yum"
 ARCH=""
 VDIS=""
 BASE_DIR="/opt/bcloud"
@@ -164,21 +164,7 @@ _check_exec(){
     return $?
 }
 _install_pg(){
-    [[ -z $PG ]] &&_check_pg
-    case ${PG} in
-        apt ) $PG install -y "$1";;
-        yum ) $PG install -y "$1" ;;
-        pacman ) $PG --needed --noconfirm -S "$1"
-    esac
-    if [[ -n "$2" ]]; then
-        _install_pg $2
-    fi
-    if [[ $? -ne 0 ]]; then
-        case ${PG} in
-            apt )  $PG update&& _install_pg "$1" apt-transport-https ;;
-            yum ) $PG makecache&& _install_pg "$1" ;;
-        esac
-    fi
+    
 }
 env_check(){
     # 检查环境
